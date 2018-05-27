@@ -4,7 +4,7 @@
 #
 Name     : R-openxlsx
 Version  : 4.0.17
-Release  : 9
+Release  : 10
 URL      : https://cran.r-project.org/src/contrib/openxlsx_4.0.17.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/openxlsx_4.0.17.tar.gz
 Summary  : Read, Write and Edit XLSX Files
@@ -14,6 +14,7 @@ Requires: R-openxlsx-lib
 Requires: R-Rcpp
 BuildRequires : R-Rcpp
 BuildRequires : clr-R-helpers
+BuildRequires : texlive
 
 %description
 level interface to writing, styling and editing worksheets. Through the use of
@@ -36,11 +37,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1527434469
+export SOURCE_DATE_EPOCH=1527435543
 
 %install
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1527434469
+export SOURCE_DATE_EPOCH=1527435543
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
