@@ -4,24 +4,38 @@
 #
 Name     : R-openxlsx
 Version  : 4.1.0
-Release  : 16
+Release  : 17
 URL      : https://cran.r-project.org/src/contrib/openxlsx_4.1.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/openxlsx_4.1.0.tar.gz
 Summary  : Read, Write and Edit XLSX Files
 Group    : Development/Tools
 License  : MIT
-Requires: R-openxlsx-lib
+Requires: R-openxlsx-lib = %{version}-%{release}
 Requires: R-Rcpp
+Requires: R-cli
+Requires: R-withr
 Requires: R-zip
 BuildRequires : R-Rcpp
+BuildRequires : R-cli
+BuildRequires : R-withr
 BuildRequires : R-zip
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 BuildRequires : texlive
 
 %description
-level interface to writing, styling and editing worksheets. Through the use of
-    'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages
-    with the added benefit of removing the dependency on Java.
+openxlsx
+========
+This [R](https://www.R-project.org/) package simplifies the
+creation of `.xlsx` files by providing
+a high level interface to writing, styling and editing
+worksheets. Through the use of
+[`Rcpp`](https://CRAN.R-project.org/package=Rcpp),
+read/write times are comparable to the
+[`xlsx`](https://CRAN.R-project.org/package=xlsx)
+and
+[`XLConnect`](https://CRAN.R-project.org/package=XLConnect)
+packages with the added benefit of removing the dependency on
+Java.
 
 %package lib
 Summary: lib components for the R-openxlsx package.
@@ -39,11 +53,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1527659426
+export SOURCE_DATE_EPOCH=1552861790
 
 %install
+export SOURCE_DATE_EPOCH=1552861790
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1527659426
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -61,9 +75,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library openxlsx
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library openxlsx
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -78,8 +92,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library openxlsx|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  openxlsx || :
 
 
 %files
@@ -116,13 +129,46 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/openxlsx/help/paths.rds
 /usr/lib64/R/library/openxlsx/html/00Index.html
 /usr/lib64/R/library/openxlsx/html/R.css
-/usr/lib64/R/library/openxlsx/libs/symbols.rds
 /usr/lib64/R/library/openxlsx/loadExample.xlsx
 /usr/lib64/R/library/openxlsx/load_xlsx_testing.R
 /usr/lib64/R/library/openxlsx/namedRegions.xlsx
 /usr/lib64/R/library/openxlsx/readTest.xlsx
 /usr/lib64/R/library/openxlsx/read_failure_test.xlsx
 /usr/lib64/R/library/openxlsx/stack_style_testing.R
+/usr/lib64/R/library/openxlsx/tests/testthat.R
+/usr/lib64/R/library/openxlsx/tests/testthat/Rplots.pdf
+/usr/lib64/R/library/openxlsx/tests/testthat/test-Workbook_properties.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-border_parsing.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-date_time_conversion.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-deleting_tables.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-encoding.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-fill_merged_cells.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-freeze_pane.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-load_read_file_read_equality.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-loading_workbook.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-loading_workbook_tables.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-named_regions.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-page_setup.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-read_from_created_wb.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-read_from_loaded_workbook.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-read_sources.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-read_write_logicals.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-read_xlsx_correct_sheet.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-remove_worksheets.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-skip_empty_cols.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-skip_empty_rows.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-style_replacing.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-table_overlaps.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-trying_to_break_openxlsx.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-v3_0_0_bugs.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-validate_table_name.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-worksheet_ordering.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-worksheet_renaming.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-write_data_to_sheetData.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-write_data_to_sheetData_NAs.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-write_read_equality.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-write_xlsx_vector_args.R
+/usr/lib64/R/library/openxlsx/tests/testthat/test-writing_posixct.R
 
 %files lib
 %defattr(-,root,root,-)
