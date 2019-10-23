@@ -4,7 +4,7 @@
 #
 Name     : R-openxlsx
 Version  : 4.1.0.1
-Release  : 25
+Release  : 26
 URL      : https://cran.r-project.org/src/contrib/openxlsx_4.1.0.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/openxlsx_4.1.0.1.tar.gz
 Summary  : Read, Write and Edit XLSX Files
@@ -16,11 +16,22 @@ Requires: R-zip
 BuildRequires : R-Rcpp
 BuildRequires : R-zip
 BuildRequires : buildreq-R
+BuildRequires : util-linux
 
 %description
-level interface to writing, styling and editing worksheets. Through the use of
-    'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages
-    with the added benefit of removing the dependency on Java.
+openxlsx
+========
+This [R](https://www.R-project.org/) package simplifies the
+creation of `.xlsx` files by providing
+a high level interface to writing, styling and editing
+worksheets. Through the use of
+[`Rcpp`](https://CRAN.R-project.org/package=Rcpp),
+read/write times are comparable to the
+[`xlsx`](https://CRAN.R-project.org/package=xlsx)
+and
+[`XLConnect`](https://CRAN.R-project.org/package=XLConnect)
+packages with the added benefit of removing the dependency on
+Java.
 
 %package lib
 Summary: lib components for the R-openxlsx package.
@@ -38,10 +49,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562205248
+export SOURCE_DATE_EPOCH=1571870296
 
 %install
-export SOURCE_DATE_EPOCH=1562205248
+export SOURCE_DATE_EPOCH=1571870296
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
