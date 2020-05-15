@@ -4,7 +4,7 @@
 #
 Name     : R-openxlsx
 Version  : 4.1.5
-Release  : 33
+Release  : 34
 URL      : https://cran.r-project.org/src/contrib/openxlsx_4.1.5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/openxlsx_4.1.5.tar.gz
 Summary  : Read, Write and Edit xlsx Files
@@ -42,10 +42,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1588802265
+export SOURCE_DATE_EPOCH=1589582411
 
 %install
-export SOURCE_DATE_EPOCH=1588802265
+export SOURCE_DATE_EPOCH=1589582411
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
