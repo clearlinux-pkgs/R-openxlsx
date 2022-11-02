@@ -4,7 +4,7 @@
 #
 Name     : R-openxlsx
 Version  : 4.2.5.1
-Release  : 56
+Release  : 57
 URL      : https://cran.r-project.org/src/contrib/openxlsx_4.2.5.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/openxlsx_4.2.5.1.tar.gz
 Summary  : Read, Write and Edit xlsx Files
